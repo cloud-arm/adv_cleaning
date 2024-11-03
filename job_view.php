@@ -296,6 +296,124 @@ $_SESSION['SESS_FORM'] = 'index';
                     <?php if($user_level == '5' || $user_level == '1'){ ?>
                     <div class="box box-info">
                         <div class="box-header">
+                            <h3>Material <small>issuing</small></h3>
+                        </div>
+
+                        <div class="box-body <?php if ($action >= 4) {} else { echo 'd-none'; } ?>">
+                            
+
+                        <form action="save/job/job_fix_save.php?id=<?php echo $id ?>" method="post">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Used Materials</label>
+                                                        <select class="form-control select2 " id="mat_id" name="mat_id"
+                                                            onchange="pro_select()" style="width: 100%;" tabindex="1"
+                                                            autofocus required>
+                                                            <?php 
+                                                                        $result = select('materials', '*');
+                                                                        while ($row = $result->fetch()) { 
+                                                                            $mat_id = $row['id']; 
+                                                                    ?>
+                                                            <option value="<?php echo $row['id']; ?>">
+                                                                <?php echo $row['name']; ?>
+                                                            </option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                                <label>Unit</label>
+                                                            <select class="form-control select2" name="unit" id="unit"
+                                                                style="width: 100%;" tabindex="1" autofocus>
+                                                                <option value="0">Default</option>
+
+                                                                <!-- Options will be populated dynamically by JavaScript -->
+                                                            </select>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Quantity</label>
+                                                        <input type="number" class="form-control" name="qty" id="qty"
+                                                            step="0.001" min="0" style="width: 100%;" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <input type="hidden" value="1" name="id2">
+                                                        <input type="submit" style="margin-top: 23px; width: 100%;"
+                                                            id="u3" value="Save" class="btn btn-info btn-sm">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <div class="box-body">
+                                            <table id="example2" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Name</th>
+                                                        <th>Unit</th>
+                                                        <th>Type</th>
+                                                        <th>QTY</th>
+                                                        <th>@</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                         // Fetch fix materials data from the database
+                                                          $result = select('fix_materials', '*', 'sales_list_id=' . $id);
+                                                           while ($row = $result->fetch()) { ?>
+                                                    <tr>
+                                                        <td><?php echo $row['id']; ?></td>
+                                                        <td><?php echo $row['mat_name']; ?></td>
+                                                        <td><?php echo $row['unit']; ?></td>
+                                                        <td><?php echo $row['type']; ?></td>
+                                                        <td><?php echo $row['qty']; ?></td>
+                                                        <td> <a class="btn btn-sm btn-danger"
+                                                                onclick="confirmDelete2(<?php echo $row['id']; ?>)"><i
+                                                                    class="fa fa-trash"></i></a></td>
+
+                                                    </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                            
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="text-right">
+                                        <?php  
+                    // Fetch the pay_type from the sales table for the current job_no
+                    $result = select('sales', '*', 'job_no = ' . $id);
+
+                    // Initialize variable for pay_type
+                    $type = '';
+
+                    // Fetch the pay_type from the database if the record exists
+                    if ($result) {
+                        while ($row = $result->fetch()) {
+                            $type = $row['pay_type'];
+                        }
+                    }
+
+                    // Check if the pay_type is 'credit'
+                  ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box box-info">
+                        <div class="box-header">
                             <h3>Price <small>Generate</small></h3>
                         </div>
 
@@ -682,6 +800,36 @@ $_SESSION['SESS_FORM'] = 'index';
             }
         }
     });
+
+    function pro_select() {
+    // Get the selected product ID from the #mat_id dropdown
+    let productId = $('#mat_id').val();
+
+    // New AJAX call to fetch units for selected product
+    $.ajax({
+        type: "GET",
+        url: "get_units.php",
+        data: {
+            mat_id: productId
+        },
+        success: function(response) {
+            // Populate the Unit selector with the received options
+            $("#unit").empty();
+            $("#unit").append(response);
+        },
+        error: function() {
+            alert("Error fetching unit data");
+        }
+    });
+}
+
+
+    function confirmDelete2(id) {
+        if (confirm('Are you sure you want to delete this item?')) {
+            // Redirect to a PHP page that handles the deletion
+            window.location.href = 'delete_fix.php?id=' + id;
+        }
+    }
     </script>
 
 
@@ -694,7 +842,7 @@ window.addEventListener("scroll", () => {
     const element1 = document.getElementById("element1");
 
     // Hold Box 1 to scroll at a slower rate to give a 'held' effect
-    element1.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+    element1.style.transform = `translateY(${scrollPosition * 0.85}px)`;
 
     
 });

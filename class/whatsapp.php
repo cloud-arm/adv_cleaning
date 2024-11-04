@@ -2,10 +2,14 @@
 
 function whatsApp($number, $text, $img = '')
 {
-    $curl = curl_init();
 
+
+    $mobile = substr($number, -9);
+    $mobile = '94' . (int)$mobile;
+
+    $curl = curl_init();
     curl_setopt_array($curl, array(
-     CURLOPT_URL => 'http://api.colorbiz.org/api/massage_api.php',
+     CURLOPT_URL => 'http://api.colorbiz.org/api/whatsapp.php',
      CURLOPT_RETURNTRANSFER => true,
      CURLOPT_ENCODING => '',
      CURLOPT_MAXREDIRS => 10,
@@ -14,7 +18,7 @@ function whatsApp($number, $text, $img = '')
      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
      CURLOPT_CUSTOMREQUEST => 'POST',
      CURLOPT_POSTFIELDS =>'{
-       "mobile_no": "'.$number.'",
+       "mobile_no": "'.$mobile.'",
        "message":"'. $text .'",
        "send_id":"CLOUD ARM",
        "img":"'.$img.'"

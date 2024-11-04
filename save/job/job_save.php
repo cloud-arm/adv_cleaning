@@ -44,7 +44,9 @@ $result=insert("job", $insertData,'../../');
 $id=base64_encode(select_item('job','id','invoice_no='.$invo,'../../'));
 
 
-whatsApp($contact,'Welcome to Advanced Cleaning Services! Your job has been booked, and our team will contact you before arrival. Thank you for choosing us!');
+whatsApp($contact,
+'Welcome to Advanced Cleaning Services! Your job has been booked, and our team will contact you before arrival. Thank you for choosing us!',
+'https://adcleaning.colorbiz.org/main/pages/forms/img/logo/logo.jpg');
 
 //echo $result['status'];
 header("location: ../../job_view.php?id=$id");

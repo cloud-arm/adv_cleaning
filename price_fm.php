@@ -5,7 +5,7 @@ include("head.php");
 include_once("auth.php");
 
 $r = $_SESSION['SESS_LAST_NAME'];
-$_SESSION['SESS_FORM'] = 'customer';
+$_SESSION['SESS_FORM'] = 'price_fm';
 ?>
 
 <body class="hold-transition skin-blue skin-orange sidebar-mini">

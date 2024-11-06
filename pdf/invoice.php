@@ -19,6 +19,8 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $info_con = $row['phone_no'];
 }
 
+
+
 $result = $db->prepare("SELECT * FROM sales WHERE   job_no='$job_id'");
 $result->bindParam(':userid', $date);
 $result->execute();
@@ -29,6 +31,9 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $invo=$row['invoice_number'];
     $total=$row['amount'];
 }
+
+$contact=select_item('customer','contact','id='.$cus_id,$path);
+
 
 
     if ($action == 1) {

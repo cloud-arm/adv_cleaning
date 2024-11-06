@@ -34,7 +34,7 @@ $_SESSION['SESS_FORM'] = 'index';
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div  id="element1">
                     <div class="box box-info">
                         <div class="box-body">
@@ -43,11 +43,11 @@ $_SESSION['SESS_FORM'] = 'index';
                                 <div class="row <?php if($action==1){echo "text-selecter";} ?>">
                                     <div class="col-md-1"><label class="<?php if($action > 1){echo "text-green";} ?>"><i
                                                 class="fa fa-circle-o"></i></label></div>
-                                    <div class="col-md-9 "><label>CUSTOMER DETAILS</label></div>
+                                    <div class="col-md-9 "><label>SERVICE</label></div>
                                 </div><br>
                                 <div class="row <?php if($action==2){echo "text-selecter";} ?>">
                                     <div class="col-md-1"><label class="<?php if($action > 2){echo "text-green";} ?>"><i class="fa fa-circle-o"></i></label></div>
-                                    <div class="col-md-9 "><label>MEMBER SELECTION</label></div>
+                                    <div class="col-md-9 "><label>TEAM</label></div>
                                 </div><br>
                                 <div class="row <?php if($action==3){echo "text-selecter";} ?>">
                                     <div class="col-md-1"><label class="<?php if($action > 3){echo "text-green";} ?>"><i class="fa fa-circle-o"></i></label></div>
@@ -115,7 +115,7 @@ $_SESSION['SESS_FORM'] = 'index';
                         <?php } ?>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <!-- / COMPANY -->
                     <div class="box box-info">
                         <div class="box-header">
@@ -131,70 +131,21 @@ $_SESSION['SESS_FORM'] = 'index';
 
                                 </div>
                                 <div class="col-md-6">
-                                    <h5>
-                                        <small>Select a few stations that provide the service from the selector below
-                                            and press the save button</small>
-                                    </h5>
-                                    <form action="save/job/job_location.php" method="post">
-                                        <div class="input-group input-group-sm">
-                                            <select class="form-control select2" name="location_id[]"
-                                                multiple="multiple" data-placeholder="Select Location"
-                                                style="width: 100%;" autocomplete="off" required>
-                                                <?php $set_cat=1;
-                                                $result=select('employee'); 
-                                                for ($i = 0; $row = $result->fetch(); $i++) { $set_cat=0; ?>
-                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['username'] ?>
-                                                </option>
-                                                <?php } ?>  
-                                                   
-                                            </select>
-                                            <span class="input-group-btn">
-                                                <button type="submit" id="u2"
-                                                    class="btn btn-info btn-flat">Save</button>
-                                            </span>
-                                            <input  type="hidden" name="company_id" value="<?php echo $company_id; ?>" >
-                                            <input type="hidden" name="job_id" value="<?php echo $id ?>">
-                                        </div>
-                                    </form>
+                                   
                                 </div>
                                 
                                 <div class="col-md-6">
                                 <div class="box-body">
                             <h4><?php echo $company; ?></h4>
                             <h5><?php echo $note ?></h5>
-                            <div class="row">
-                                <?php $result=select('job_location','*','job_id='.$id); for ($i = 0; $row = $result->fetch(); $i++) { ?>
-                                <div class="col-md-4">
-                                    <div class="box box-primary collapsed-box box-solid">
-                                        <div class="box-header with-border" style="border-radius: 5px;">
-                                            <h3 class="box-title"><?php echo $row['name'] ?></h3>
-                                            <div class="box-tools pull-right">
-                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="box-body">
-                                            <table id="example2" class="table table-bordered table-striped">
-                                                <?php $loca_id=$row['location_id']; $result1=select('contact','*','location_id='.$loca_id); for ($i = 0; $row1 = $result1->fetch(); $i++) { ?>
-                                                <tr width="100%">
-                                                    <td><?php echo $row1['name'].' - '.$row1['position'] ?></td>
-                                                    <td><?php echo $row1['phone_no'] ?></td>
-                                                </tr>
-                                                <?php } ?>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php } ?>
-                            </div>
+                            
                         </div>
                                 </div>
                             </div>
                         </div>
                         
                     </div>
-                    <!-- location -->
+                    <!-- Product -->
                     <div class="box box-info">
                         <div class="box-header">
                             <h3>PRODUCT <small> Add</small></h3>
@@ -202,9 +153,9 @@ $_SESSION['SESS_FORM'] = 'index';
                         <div class="box-body <?php if($action >= 1){}else{echo 'd-none';} ?>">
                             <form action="save/job/job_product_save.php" method="post">
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Product</label>
+                                            <label>Service</label>
                                             <select class="form-control select2 " id="name"
                                                 name="product_id" style="width: 100%;" autofocus>
                                                 <?php 
@@ -228,7 +179,14 @@ $_SESSION['SESS_FORM'] = 'index';
                                                 style="width: 100%;" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Price</label>
+                                            <input type="number" class="form-control" name="price" id="qty"
+                                                style="width: 100%;" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label>Description</label>
                                             <input type="text" class="form-control" name="about" style="width: 100%;"
@@ -253,16 +211,18 @@ $_SESSION['SESS_FORM'] = 'index';
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Unit price</th>
+                                        <th>QTY</th>
                                         <th>Amount</th>
                                         <th>Status</th>
+                                        <th>#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                        // Fetch channeling data from the database, sorted by the most recent entry first
-                        $result = select('sales_list', '*', "job_no='$id' AND type!='direct'", '');
+                                     // Fetch channeling data from the database, sorted by the most recent entry first
+                                     $result = select('sales_list', '*', "job_no='$id' AND status!='delete'", '');
 
-                        for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                                     for ($i = 0; $row = $result->fetch(); $i++) { ?>
                                     <tr>
                                         <td><?php echo $row['id'] ?></td>
                                         <td>
@@ -279,21 +239,118 @@ $_SESSION['SESS_FORM'] = 'index';
                                         <td><?php echo $row['name'] ?></td>
                                         <td><?php echo $row['about'] ?></td>
                                         <td><?php echo $row['price']  ?></td>
+                                        <td><?php echo $row['qty']  ?></td>
                                         <td><?php echo $row['amount'] ?></td>
-                                        <td><?php if($row['status_id']==0){echo "pending";}else{echo "Done";} ?></td>
-
+                                        <td><?php echo $row['status'] ?></td>
+                                        <td><?php if($row['status_id']==0){?> 
+                                            <button class="btn btn-sm btn-red" onclick="confirmDelete_product(<?php echo $row['id']  ?>)"><i class="fa fa-trash"></i></button>
+                                            <?php } ?>
+                                        </td>
                                         
-
                                     </tr>
                                     <?php } ?>
                                 </tbody>
                             </table>
+                            <a class="pull-right" href="save/genarate_quotation.php?id=<?php echo base64_decode($_GET['id']); ?>">
+                                            <button class="btn" id="generate_invo">Generate
+                                                Quotation</button> </a>
+                        </div>
+                        
+                    </div>
+
+                    <!-- Team -->
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h3>Team <small>Add</small></h3>
                         </div>
 
+                        <div class="box-body <?php if ($action >= 2) {} else { echo 'd-none'; } ?>">
+                            
+
+                        
+                                       <div class="col-md-6">
+                                       <small>Select a few stations that provide the service from the selector below
+                                            and press the save button</small>
+                                    
+                                    <form action="save/job/job_team.php" method="post">
+                                        <div class="input-group input-group-sm">
+                                            <select class="form-control select2" name="location_id[]"
+                                                multiple="multiple" data-placeholder="Select Location"
+                                                style="width: 100%;" autocomplete="off" required>
+                                                <?php $set_cat=1;
+                                                $result=select('employee'); 
+                                                for ($i = 0; $row = $result->fetch(); $i++) { $set_cat=0; ?>
+                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['username'] ?>
+                                                </option>
+                                                <?php } ?>  
+                                                   
+                                            </select>
+                                            <span class="input-group-btn">
+                                                <button type="submit" id="u2"
+                                                    class="btn btn-info btn-flat">Save</button>
+                                            </span>
+                                            <input  type="hidden" name="company_id" value="<?php echo $company_id; ?>" >
+                                            <input type="hidden" name="job_id" value="<?php echo $id ?>">
+                                        </div>
+                                    </form>
+                                        
+                                       </div>
+
+                                        <div class="box-body">
+                                        <div class="row">
+                                <?php $result=select('job_location','*','job_id='.$id); for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                                <div class="col-md-3">
+                                    <div class="box box-primary collapsed-box box-solid">
+                                        <div class="box-header with-border" style="border-radius: 5px;">
+                                            <h3 class="box-title"><?php echo $row['name'] ?></h3>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <table id="example2" class="table table-bordered table-striped">
+                                                <?php $loca_id=$row['location_id']; $result1=select('contact','*','location_id='.$loca_id); for ($i = 0; $row1 = $result1->fetch(); $i++) { ?>
+                                                <tr width="100%">
+                                                    <td><?php echo $row1['name'].' - '.$row1['position'] ?></td>
+                                                    <td><?php echo $row1['phone_no'] ?></td>
+                                                </tr>
+                                                <?php } ?>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                                        </div>
+                            
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="text-right">
+                                        <?php  
+                    // Fetch the pay_type from the sales table for the current job_no
+                    $result = select('sales', '*', 'job_no = ' . $id);
+
+                    // Initialize variable for pay_type
+                    $type = '';
+
+                    // Fetch the pay_type from the database if the record exists
+                    if ($result) {
+                        while ($row = $result->fetch()) {
+                            $type = $row['pay_type'];
+                        }
+                    }
+
+                    // Check if the pay_type is 'credit'
+                  ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- location -->
-                    
-                    <?php if($user_level == '5' || $user_level == '1'){ ?>
+                    <!-- Material -->
                     <div class="box box-info">
                         <div class="box-header">
                             <h3>Material <small>issuing</small></h3>
@@ -412,6 +469,7 @@ $_SESSION['SESS_FORM'] = 'index';
                         </div>
                     </div>
 
+                     <!-- Pricing -->
                     <div class="box box-info">
                         <div class="box-header">
                             <h3>Price <small>Generate</small></h3>
@@ -586,6 +644,7 @@ $_SESSION['SESS_FORM'] = 'index';
                         </div>
                     </div>
 
+                     <!-- Payment -->
                     <div class="box box-info">
                         <div class="box-header">
                             <h3>Payment <small>section</small></h3>
@@ -723,7 +782,7 @@ $_SESSION['SESS_FORM'] = 'index';
                             </form>
                         </div>
                     </div>
-                    <?php } ?>
+                    
 
 
         </section>
@@ -828,6 +887,13 @@ $_SESSION['SESS_FORM'] = 'index';
         if (confirm('Are you sure you want to delete this item?')) {
             // Redirect to a PHP page that handles the deletion
             window.location.href = 'delete_fix.php?id=' + id;
+        }
+    }
+
+    function confirmDelete_product(id) {
+        if (confirm('Are you sure you want to delete this item?')) {
+            // Redirect to a PHP page that handles the deletion
+            window.location.href = 'save/job/product_dll.php?id=' + id+'&job_no=<?php echo $id; ?>';
         }
     }
     </script>

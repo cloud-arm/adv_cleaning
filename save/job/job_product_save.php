@@ -10,9 +10,7 @@ $job_no = $_POST['job_no'];
 $date = date('Y-m-d'); 
 $about=$_POST['about'];
 
-
-
-
+$price_set=$_POST['price'];
 
  
 $product_name=select_item('products','product_name','id='.$product_id,'../../');
@@ -25,6 +23,9 @@ while ($row = $result->fetch()) {
     }
 }
 
+if(!$price_set ==''){
+    $price=$_POST['price'];
+}
 
 $action = select_item('job','action','id='.$job_no,'../../');
 //echo "$action";
@@ -40,7 +41,7 @@ $insertData = array(
         "product_id" => $product_id,
         "date" => $date,
         "about" => $about,
-        "status" =>'measure',
+        "status" =>'pending',
     ),
     "other" => array(
     ),
@@ -62,4 +63,4 @@ if($action== 2){
  
 }
 header("location: ../../job_view.php?id=" . base64_encode($job_no));
-?>
+

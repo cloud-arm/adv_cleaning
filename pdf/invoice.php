@@ -136,7 +136,7 @@ font-family: Poppins;
 ';
 
 echo $output; 
-//$output='hidden';
+$output='hidden';
 
 $contact = '0779252594';
 

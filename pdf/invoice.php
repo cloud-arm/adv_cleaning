@@ -23,7 +23,7 @@ $result = $db->prepare("SELECT * FROM sales WHERE   job_no='$job_id'");
 $result->bindParam(':userid', $date);
 $result->execute();
 for ($i = 0; $row = $result->fetch(); $i++) {
-	$cus_name = $row['customer_name'];
+	$name = $row['customer_name'];
     $cus_id=$row['customer_id'];
     $address=$row['address'];
     $invo=$row['invoice_number'];
@@ -53,7 +53,7 @@ for ($i = 0; $row = $result->fetch(); $i++) {
 
 
     $sales_list = "";
-    $result = select("sales_list","*","job_no='$job_id' ");
+    $result = select("sales_list","*","job_no='$job_id' ",$path);
     
     for ($i = 0; $row = $result->fetch(); $i++) {
 
@@ -96,7 +96,7 @@ font-family: Poppins;
                         <b style="font-family:Poppins; font-size:30px">' . $in_type . '</b><br><br>
                         <b style="font-family: Poppins; font-size:14px"> ' . $name . '</b><br>
                         <b style="font-family: Poppins; font-size:14px">' . $address . '</b><br>
-                        <b style="font-family: Poppins; font-size:14px">#' . $row1['invoice_number'] . '</b><br>
+                        <b style="font-family: Poppins; font-size:14px">#' . $invo . '</b><br>
                         <p>Date: ' . date('Y-M-d') . ' Time:' . date('H:m') . '</p>
                     </td>
                 </tr>
@@ -136,6 +136,7 @@ font-family: Poppins;
 </html>
 ';
 
+echo $output; 
 
 $contact = '94779252594';
 if (!empty($contact)) {
@@ -146,4 +147,4 @@ if (!empty($contact)) {
 }
 $return = $_SESSION['SESS_BACK'];
 
-header("location: ../$return");
+//header("location: ../$return");

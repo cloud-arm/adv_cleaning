@@ -11,3 +11,4 @@ include("class/db_query/update.php");
 include("class/db_query/query.php");
 include("class/table.php");
 include("class/form.php");
+include("class/pdf.php");

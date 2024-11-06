@@ -5,6 +5,7 @@ include("head.php");
 include_once("auth.php");
 $r = $_SESSION['SESS_LAST_NAME'];
 $_SESSION['SESS_FORM'] = 'index';
+$_SESSION['SESS_BACK']='job_view';
 ?>
 <style>
 .floating-element {
@@ -280,11 +281,33 @@ $_SESSION['SESS_FORM'] = 'index';
 
                                 </div>
                             </div>
-                            <?php } ?>
+                            <?php } $qt=select_item('sales','transaction_id'," type='Quotation' AND job_no='$id'");
+                            if($qt > 0){ ?>
+                            <div class="btn-group pull-right">
+                                            <button type="button"
+                                                onclick="location.href = 'save/quotation_print.php?id=<?php echo base64_decode($_GET['id']); ?>&type=2' "
+                                                class="btn btn-default btn-flat"
+                                                style="border-radius: 10px 0px 0px 10px">Print</button>
+                                            <button type="button" class="btn btn-default btn-flat dropdown-toggle"
+                                                data-toggle="dropdown" style="border-radius: 0px 10px 10px 0px">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">GET</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a
+                                                        href="save/quotation_print.php?id=<?php echo base64_decode($_GET['id']); ?>&type=2">Print</a>
+                                                </li>
+                                                <li><a
+                                                        href="save/quotation_print.php?id=<?php echo base64_decode($_GET['id']); ?>">Re Generate</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                            <?php }else{ 
+                             ?>
                             <a class="pull-right"
                                 href="save/genarate_quotation.php?id=<?php echo base64_decode($_GET['id']); ?>">
                                 <button class="btn" id="generate_invo">Generate
-                                    Quotation</button> </a>
+                                    Quotation</button> </a> <?php } ?>
                         </div>
 
                     </div>

@@ -52,6 +52,6 @@ if(!$result5) {
 
 $cus_name=select_item('sales','customer_name',"job_no='$id' AND type='Quotation'", '../');
 $text="Dear  $cus_name,Thank you for choosing Advanced Cleaning Services! Please find your quote attached. We look forward to your feedback and are excited to provide you with our top-quality service.Best regards,The Advanced Cleaning Services Team";
-header("location: ../pdf/invoice.php?id= $id&type=2&text=$text");
+header("location: ../pdf/invoice.php?id=$id&type=2&text=$text");
 
 

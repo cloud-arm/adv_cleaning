@@ -39,16 +39,6 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     }
 
     $tot_row = '
-                <tr>
-                    <td align="center"><img src="icon/r.png" width="40" alt=""></td>
-                    <td style="font-size:18px" colspan="3" align="right"><h3>Total:</h3></td>
-                    <td style="font-size:18px" align="right"><h3>Rs.' . number_format($total, 2) . '</h3></td>
-                </tr>
-                <tr>
-                    <td align="center">CLOUD ARM</td>
-                    <td style="font-size:18px" colspan="3" align="right"><h3></h3></td>
-                    <td style="font-size:18px" align="right"><h3></h3></td>
-                </tr>
                 ';
 
 
@@ -137,15 +127,16 @@ font-family: Poppins;
 ';
 
 echo $output; 
+//$output='hidden';
 
-
-$contact = '94779252594';
+$contact = '0779252594';
 
     $text = 'Dear [Customers Name],Thank you for choosing Advanced Cleaning Services! Please find your quote attached. We look forward to your feedback and are excited to provide you with our top-quality service.Best regards,The Advanced Cleaning Services Team';
     $url = get_pdf($output, 'invoice', 'bin/');
     $url = 'pdf/' . $url;
     echo "URL is".$url;
-    whatsApp($contact, $text, $url);
+    whatsApp($contact, $text,$url);
+    
 
 $return = $_SESSION['SESS_BACK'];
 

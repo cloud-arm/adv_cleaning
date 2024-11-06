@@ -227,7 +227,7 @@
 
 							<div class="col-xs-4" id="btn-box" style="display: flex;gap: 15px;justify-content: center;">
 								<a href="quotation_print?id=<?php echo $job_id.'&type='.$action; ?>&print" class="btn btn-danger"> <i class="fa fa-print"></i> Print</a>
-								<a href="../pdf/invoice.php?id=<?php echo $job_id.'&type='.$action; ?>" class="btn btn-success"> <i class="fa fa-whatsapp"></i> Whatsapp</a>
+								<a href="../pdf/invoice.php?id=<?php echo $job_id.'&type='.$action; ?>&text='' " class="btn btn-success"> <i class="fa fa-whatsapp"></i> Whatsapp</a>
 								<a href="../job_view?id=<?php echo base64_encode($job_id); ?>" class="btn btn-warning"> <i class="fa fa-home"></i> Home</a>
 							</div>
 						</div>

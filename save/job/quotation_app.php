@@ -13,4 +13,5 @@ if($app==1){
     $result22 = update('job', ['action' => '0'], 'id='.$id, '../../');
 }
 
-header("location: ../../job_view?id=".base64_encode($id));
+$text='Welcome to Advanced Cleaning Services! Your job has been booked, and our team will contact you before arrival. Thank you for choosing us!';
+header("location: ../../pdf/invoice.php?id=$id&type=2&text=$text");

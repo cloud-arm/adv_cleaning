@@ -147,4 +147,6 @@ if (!empty($contact)) {
 }
 $return = $_SESSION['SESS_BACK'];
 
+echo $url;
+
 //header("location: ../$return");

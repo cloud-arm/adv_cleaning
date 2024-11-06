@@ -45,12 +45,12 @@ $contact=select_item('customer','contact','id='.$cus_id,$path);
 
     $tot_row = '
                 <tr>
-                    <td align="center"><img src="icon/r.png" width="40" alt=""></td>
+                    <td align="center"><img src="../icon/logo light.png" width="110" alt=""></td>
                     <td style="font-size:18px" colspan="3" align="right"><h3>Total:</h3></td>
                     <td style="font-size:18px" align="right"><h3>Rs.' . number_format($total, 2) . '</h3></td>
                 </tr>
                 <tr>
-                    <td align="center">CLOUD ARM</td>
+                    <td align="center"></td>
                     <td style="font-size:18px" colspan="3" align="right"><h3></h3></td>
                     <td style="font-size:18px" align="right"><h3></h3></td>
                 </tr>

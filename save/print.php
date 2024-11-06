@@ -2,212 +2,254 @@
 <html>
 
 <head>
-    <?php
-    session_start();
-    include("../connect.php");
-    include("../config.php");
+	<?php
+	session_start();
+	include("../connect.php");
+	include("../config.php");
+	date_default_timezone_set("Asia/Colombo");
+	?>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>CLOUD ARM | Invoice..</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-    $invo = $_GET['id'];
-    ?>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Grafix | Invoice</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<style>
+		@media print {
+			h5 {
+				line-height: 1.5;
+				margin-bottom: 0;
+			}
 
-    <style>
-        /* Print-specific styles */
-        @media print {
-            
+			h4 span {
+				float: right;
+			}
 
-            .print-hide {
-                display: none;
-            }
+			h3 {
+				line-height: 1.5;
+				font-weight: 600;
+				text-decoration: underline;
+			}
 
-            body {
-                font-size: 12pt;
-            }
+			#btn-box {
+				display: none !important;
+			}
 
-            header {
-                text-align: center;
-                background-color: #007bff;
-                padding: 10px 0;
-                border-radius: 8px;
-            }
+			a {
+				color: #3c8dbc !important;
+				text-decoration: underline;
+			}
 
-            table,
-            th,
-            td {
-                border: 1px solid black;
-                border-collapse: collapse;
-                padding: 10px;
-            }
+			hr {
+				border-color: #000 !important;
+				text-decoration: underline;
+				margin: 0 !important;
+			}
 
-            footer {
-                page-break-after: avoid;
-            }
-        }
-    </style>
-
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+			table thead tr th {
+				text-align: center;
+			}
+		}
+	</style>
 </head>
 
-<body onload="window.print();" style="font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9;">
-    <?php
-    $sec = "1";
-    $_SESSION['page'] = "END";
-    $admin = $_SESSION['SESS_LAST_NAME'];
-    $invo = $_GET['id'];
-    if ($admin == "admin") {
-        ?>
-        <meta http-equiv="refresh" id="print"
-              content="<?php echo $sec; ?>;URL='../job_view.php?id=<?php echo base64_encode($_GET['id']); ?>'">
-        <?php
-    } else {
-        ?>
-        <meta http-equiv="refresh" id="print"
-              content="<?php echo $sec; ?>;URL='../job_view?id=<?php echo base64_encode($_GET['id']); ?>'">
-        <br>
-        <?php
-    }
-    ?>
+<body>
+	<?php
+	$sec = "1";
 
-    <!-- Print button to manually trigger print -->
-    <div class="print-hide" style="text-align: center; margin-bottom: 20px;">
-        <button onclick="window.print();" class="btn btn-primary">Print Invoice</button>
-    </div>
+	$return =  $_SESSION['SESS_BACK'];
 
-    <div class="invo_hed">
-        <header>
-        <h3 style="margin: 0; color: #28a745;">Final Bill</h3>
-        </header>
+    
+	?>
+	<?php if (isset($_GET['print'])) { ?>
 
-        <section style="margin-top: 20px;">
-            <div
-                style="display: flex; justify-content: space-between; background-color: #e9ecef; padding: 10px; border-radius: 8px;">
-                <div>
-                <img src="../img/logo/logo.jpg" width="140" alt="Logo" style="margin-bottom: 10px;">
-            <h4 style="margin: 5px 0;">Invoice No: <?php echo select_item('sales','invoice_number',"job_no='$invo'",'../'); ?></h4>
-            <p style="margin: 0; font-size: 14px;">Date:
-                <?php date_default_timezone_set("Asia/Colombo"); echo date("Y-m-d"); ?> Time:
-                <?php echo date("h:ia"); ?></p>
-                
+		<body onload="window.print()" style=" font-size: 13px;font-family: arial;">
+		<?php } else { ?>
+
+			<body style=" font-size: 13px; font-family: arial;margin: 0 10px;overflow-x: hidden;">
+			<?php } ?>
+
+			<?php if (isset($_GET['print'])) { ?>
+				<meta http-equiv="refresh" content="<?php echo $sec; ?>;URL='<?php echo $return; ?>'">
+			<?php } ?>
+			<div class="wrapper">
+				<!-- Main content -->
+				<section class="invoice">
+
+					<?php $path="../";
+					$result = query("SELECT * FROM info ",$path);
+					
+					for ($i = 0; $row = $result->fetch(); $i++) {
+						$info_name = $row['name'];
+						$info_add = $row['address'];
+						$info_vat = $row['vat_no'];
+						$info_con = $row['phone_no'];
+						$info_mail = $row['email'];
+					}
+
+                    $job_id=$_GET['id'];
                     
-                </div>
-                <div>
-                <h4>BILL TO <br>
-                <?php
-                        
-                        $result = $db->prepare("SELECT * FROM sales WHERE job_no='$invo'");
-                        $result->execute();
-                        while ($row = $result->fetch()) {
-                            echo $row['customer_name'];
-                            echo "<br>";
-                            echo "<b>Customer ID:</b> " . $row['customer_id'];
-                        }
-                        ?>
-                </h4>
-                
-                </div>
-            </div>
-        </section>
-
-        <section style="margin-top: 20px;">
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; background-color: #ffffff; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        <thead style="background-color: #007bff; color: white;">
-            <tr>
-                <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">#</th>
-                <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Name</th>
-                <th style="border: 1px solid #ddd; padding: 12px; text-align: right;">Unit Price</th>
-                <th style="border: 1px solid #ddd; padding: 12px; text-align: right;">Qty</th>
-                <th style="border: 1px solid #ddd; padding: 12px; text-align: right;">Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-    <?php
-    $tot_amount = 0;
-    $num = 0;
-
-    if(!isset($_GET['type'])){
-
-    $result = $db->prepare("SELECT name FROM sales_list WHERE job_no='$invo' AND status != 'reject' AND status != 'delete' GROUP BY name ORDER BY id ASC");
-    $result->execute();
-
-    while ($row = $result->fetch()) {
-        $productName = $row['name'];
-        $sizesResult = $db->prepare("SELECT width, height, about, SUM(qty) as total_qty, SUM(amount) as total_amount FROM sales_list WHERE job_no='$invo' AND name='$productName' AND status != 'reject' AND status != 'delete' GROUP BY width, height, about");
-        $sizesResult->execute();
-        $firstRow = true;
-        ?>
-        <tr>
-            <td style='border: 1px solid #ddd; padding: 12px;'></td>
-            <th style='border: 1px solid #ddd; padding: 12px;'><?php echo $productName ?></th>
-            <td style='border: 1px solid #ddd; padding: 12px;'></td>
-            <td style='border: 1px solid #ddd; padding: 12px;'></td>
-            <td style='border: 1px solid #ddd; padding: 12px;'></td>
-            
-        </tr>
-
-         <?php
-        while ($sizeRow = $sizesResult->fetch()) {
-            $num += 1; ?>
-            <tr>
-                <td style='border: 1px solid #ddd; padding: 12px;'><?= $num ; ?></td>
-                <td style='border: 1px solid #ddd; padding: 12px;'>
-                    <?= '<small style="color: #555;">' . $sizeRow['about'] . '</small>'; ?>
-                </td>
-                
-                <td style='border: 1px solid #ddd; padding: 12px; text-align: right;'>Rs. <?= number_format($sizeRow['total_amount'] / $sizeRow['total_qty'], 2); ?></td>
-                <td style='border: 1px solid #ddd; padding: 12px; text-align: right;'><?= $sizeRow['total_qty']; ?></td>
-                <td style='border: 1px solid #ddd; padding: 12px; text-align: right;'>Rs. <?= number_format($sizeRow['total_amount'], 2); ?></td>
-            </tr>
-            <?php
-            $firstRow = false;
-            $tot_amount += $sizeRow['total_amount'];
-        }
-    }
-}else{
-    $result = select('sales_list','SUM(amount) AS total,location' ,"job_no='$invo' GROUP BY location_id ASC",'../');
-    while ($row = $result->fetch()) {
-        $num += 1;
-        $tot_amount +=$row['total'];
-    ?>
-    <tr>
-            <td style='border: 1px solid #ddd; padding: 12px;'><?= $num ; ?></td>
-            <th style='border: 1px solid #ddd; padding: 12px;'><?php echo $row['location']  ?></th>
-            <td style='border: 1px solid #ddd; padding: 12px;'></td>
-            <td style='border: 1px solid #ddd; padding: 12px;'></td>
-            <td style='border: 1px solid #ddd; padding: 12px; text-align: right;'>Rs. <?php echo $row['total']  ?></td>
-            
-        </tr>
-
-<?php } } ?>
-</tbody>
-
-        <tfoot>
-            <tr>
-                <td colspan="4" style="text-align: right; border: 1px solid #ddd; padding: 12px;"><strong>Total Amount:</strong></td>
-                <td style="border: 1px solid #ddd; padding: 12px; text-align: right;"><strong>Rs. <?= number_format($tot_amount, 2); ?></strong></td>
-            </tr>
-        </tfoot>
-    </table>
-</section>
+                    $action=$_GET['type'];
+                    
 
 
+					?>
 
-        <footer style="margin-top: 20px; text-align: center;">Make all Cheques payable to "Advanced Cleaners" <br>
+
+					<div class="row">
+						<!-- accepted payments column -->
+						 
+						<div class="col-xs-6">
+							<div class="col-xs-4">
+							<img src="../img/logo/logo.jpg" width="140" alt="Logo" style="margin-bottom: 10px;">
+							</div>
+							<div class="col-xs-8">
+							<h5 >
+								<b><?php echo $info_name; ?></b> <br>
+								
+								<?php echo $info_add; ?> <br>
+								<?php echo $info_con; ?> <br>
+								<a href="#" style="color:blue"><?php echo $info_mail; ?></a>
+							</h5>
+							</div>
+							
+						</div>
+
+						<div class="col-xs-12">
+							<hr>
+						</div>
+
+						<div class="col-xs-12">
+							<h3 style="text-align: center;">
+								<?php if ($action == 1) {
+									echo "INVOICE";
+								} else {
+									echo "QUTATION";
+								} ?>
+							</h3>
+						</div>
+						<!-- /.col -->
+						<div class="col-xs-7">
+							<h5>
+
+								<?php
+								$result = $db->prepare("SELECT * FROM sales WHERE   job_no='$job_id'");
+								$result->bindParam(':userid', $date);
+								$result->execute();
+								for ($i = 0; $row = $result->fetch(); $i++) {
+
+									$cus_name = $row['customer_name'];
+                                    $cus_id=$row['customer_id'];
+                                    $address=$row['address'];
+                                   
+                                    $invo=$row['invoice_number'];
+								} ?>
+
+								<b>INVOICE TO:</b> <br>
+								<?php echo $cus_name; ?> <br>
+								<?php echo $address; ?> <br>
+								<b>Customer id: </b> <?php echo $cus_id; ?> <br>
+								<b>Job Number: </b> <?php echo $job_id; ?>
+							</h5>
+						</div>
+						<!-- /.col -->
+
+						<div class="col-xs-5 pull-right">
+							<h5 style="float:right">
+								<b> Date:</b> <?php echo $date; ?> <br>
+								<b>Invoice:</b> <?php echo $invo; ?> <br>
+								<br>
+								<small>
+									Print Date: <?php echo date('Y-m-d'); ?> <br>
+									Print Time- <?php echo date('H:i:s'); ?>
+								</small>
+							</h5>
+						</div>
+
+					</div>
+
+
+					<div class="box-body">
+						<table id="example1" class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Name</th>
+									<th>Qty</th>
+									<th>Price </th>
+									<th>Amount </th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								date_default_timezone_set("Asia/Colombo");
+								$hh = date("Y/m/d");
+								$tot_amount = 0;
+								$num = 0;
+								$result = $db->prepare("SELECT * FROM sales_list WHERE   job_no='$job_id'");
+								$result->bindParam(':userid', $date);
+								$result->execute();
+								for ($i = 0; $row = $result->fetch(); $i++) {
+									$num += 1;
+
+									$price = $row['price'] - ($row['dic'] / $row['qty']);
+									$amount = $price * $row['qty'];
+								?>
+									<tr>
+										<td><?php echo $num; ?></td>
+										<td><?php echo $row['name']; ?></td>
+										<td><?php echo $row['qty']; ?></td>
+										<td>Rs.<?php echo $price; ?></td>
+										<td>Rs.<?php 	echo number_format($amount, 2); ?></td>
+										<?php $tot_amount += $amount; ?>
+									</tr>
+								<?php } ?>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>Total: </td>
+									<td>Rs.<?php echo number_format($tot_amount, 2); ?></td>
+								</tr>
+							</tbody>
+							<tfoot>
+							</tfoot>
+						</table>
+
+						<div class="row">
+							
+
+							<div class="col-xs-4" id="btn-box" style="display: flex;gap: 15px;justify-content: center;">
+								<a href="quotation_print?id=<?php echo $job_id.'&type='.$action; ?>&print" class="btn btn-danger"> <i class="fa fa-print"></i> Print</a>
+								<a href="../pdf/invoice.php?id=<?php echo $job_id.'&type='.$action; ?>" class="btn btn-success"> <i class="fa fa-whatsapp"></i> Whatsapp</a>
+								<a href="../job_view?id=<?php echo base64_encode($job_id); ?>" class="btn btn-warning"> <i class="fa fa-home"></i> Home</a>
+							</div>
+						</div>
+
+					</div>
+
+					<br><br><br>
+					<div class="row">
+						<div class="col-md-12">Make all Cheques payable to "Advanced Cleaners" <br>
  FOR ENQUIRIES Negombo -031228645 COLOMBO BRANCH - 112690944 <br>
  Thank you for your business!
-            </footer>
-    </div>
-</body>
+						</div>
+					</div>
+
+					<br><br><br>
+					<div class="row">
+						<div class="col-xs-12" style="text-align: center;">
+							This is a system generated document and signature is not required
+						</div>
+					</div>
+				</section>
+			</div>
+			</body>
 
 </html>

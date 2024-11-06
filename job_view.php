@@ -7,10 +7,12 @@ $r = $_SESSION['SESS_LAST_NAME'];
 $_SESSION['SESS_FORM'] = 'index';
 ?>
 <style>
-    .floating-element{
-        transition: transform 0.2s ease; /* Smooth transition */
-    }
+.floating-element {
+    transition: transform 0.2s ease;
+    /* Smooth transition */
+}
 </style>
+
 <body class="hold-transition skin-blue skin-orange sidebar-mini">
 
     <?php include_once("start_body.php"); ?>
@@ -35,37 +37,44 @@ $_SESSION['SESS_FORM'] = 'index';
         <section class="content">
             <div class="row">
                 <div class="col-md-2">
-                    <div  id="element1">
-                    <div class="box box-info">
-                        <div class="box-body">
+                    <div id="element1">
+                        <div class="box box-info">
+                            <div class="box-body">
 
-                            <div style=" margin: 20px;">
-                                <div class="row <?php if($action==1){echo "text-selecter";} ?>">
-                                    <div class="col-md-1"><label class="<?php if($action > 1){echo "text-green";} ?>"><i
-                                                class="fa fa-circle-o"></i></label></div>
-                                    <div class="col-md-9 "><label>SERVICE</label></div>
-                                </div><br>
-                                <div class="row <?php if($action==2){echo "text-selecter";} ?>">
-                                    <div class="col-md-1"><label class="<?php if($action > 2){echo "text-green";} ?>"><i class="fa fa-circle-o"></i></label></div>
-                                    <div class="col-md-9 "><label>TEAM</label></div>
-                                </div><br>
-                                <div class="row <?php if($action==3){echo "text-selecter";} ?>">
-                                    <div class="col-md-1"><label class="<?php if($action > 3){echo "text-green";} ?>"><i class="fa fa-circle-o"></i></label></div>
-                                    <div class="col-md-9 "><label>PROSESING</label></div>
-                                </div><br>
-                                <div class="row <?php if($action==4){echo "text-selecter";} ?>">
-                                    <div class="col-md-1"><label class="<?php if($action > 4){echo "text-green";} ?>"><i class="fa fa-circle-o"></i></label></div>
-                                    <div class="col-md-9 "><label>PRICEING </label></div>
-                                </div><br>
-                                <div class="row <?php if($action==5){echo "text-selecter";} ?>">
-                                    <div class="col-md-1"><label><i class="fa fa-circle-o"></i></label></div>
-                                    <div class="col-md-9 "><label>PAYMENT </label></div>
-                                </div>
+                                <div style=" margin: 20px;">
+                                    <div class="row <?php if($action==1){echo "text-selecter";} ?>">
+                                        <div class="col-md-1"><label
+                                                class="<?php if($action > 1){echo "text-green";} ?>"><i
+                                                    class="fa fa-circle-o"></i></label></div>
+                                        <div class="col-md-9 "><label>QUOTATION</label></div>
+                                    </div><br>
+                                    <div class="row <?php if($action==2){echo "text-selecter";} ?>">
+                                        <div class="col-md-1"><label
+                                                class="<?php if($action > 2){echo "text-green";} ?>"><i
+                                                    class="fa fa-circle-o"></i></label></div>
+                                        <div class="col-md-9 "><label>TEAM</label></div>
+                                    </div><br>
+                                    <div class="row <?php if($action==3){echo "text-selecter";} ?>">
+                                        <div class="col-md-1"><label
+                                                class="<?php if($action > 3){echo "text-green";} ?>"><i
+                                                    class="fa fa-circle-o"></i></label></div>
+                                        <div class="col-md-9 "><label>PROSESING</label></div>
+                                    </div><br>
+                                    <div class="row <?php if($action==4){echo "text-selecter";} ?>">
+                                        <div class="col-md-1"><label
+                                                class="<?php if($action > 4){echo "text-green";} ?>"><i
+                                                    class="fa fa-circle-o"></i></label></div>
+                                        <div class="col-md-9 "><label>PRICEING </label></div>
+                                    </div><br>
+                                    <div class="row <?php if($action==5){echo "text-selecter";} ?>">
+                                        <div class="col-md-1"><label><i class="fa fa-circle-o"></i></label></div>
+                                        <div class="col-md-9 "><label>PAYMENT </label></div>
+                                    </div>
 
-                                <!-- DONUT CHART -->
-                                
+                                    <!-- DONUT CHART -->
 
-                                <?php
+
+                                    <?php
                             // Assuming you already have a valid database connection
                             // Assuming $id is already set to the current job_no
 
@@ -103,15 +112,15 @@ $_SESSION['SESS_FORM'] = 'index';
                                 var pieData = " . json_encode($status_counts) . ";
                             </script>";
                             ?>
+                                </div>
                             </div>
-                    </div>
-                    </div>
+                        </div>
 
 
-                             <?php if($action >= 3){ ?>
+                        <?php if($action >= 3){ ?>
 
-                           
-                        
+
+
                         <?php } ?>
                     </div>
                 </div>
@@ -124,26 +133,27 @@ $_SESSION['SESS_FORM'] = 'index';
                                     <h3>CUSTOMER <small>Details</small></h3>
                                 </div>
                                 <div class="col-md-9  ">
-                                <?php $result=query("SELECT user.upic as img FROM user_activity JOIN user ON user_activity.user_id=user.employee_id WHERE user_activity.job_no= '$id' GROUP BY user_activity.user_id ");
+                                    <?php $result=query("SELECT user.upic as img FROM user_activity JOIN user ON user_activity.user_id=user.employee_id WHERE user_activity.job_no= '$id' GROUP BY user_activity.user_id ");
                                 for ($i = 0; $row = $result->fetch(); $i++) { ?>
-                                    <img  src="<?php echo $row['img']  ?>" style=" width: 30px;" class="img-circle user-data pull-right" alt="User Image" >
-                                <?php } ?>
+                                    <img src="<?php echo $row['img']  ?>" style=" width: 30px;"
+                                        class="img-circle user-data pull-right" alt="User Image">
+                                    <?php } ?>
 
                                 </div>
                                 <div class="col-md-6">
-                                   
+
                                 </div>
-                                
+
                                 <div class="col-md-6">
-                                <div class="box-body">
-                            <h4><?php echo $company; ?></h4>
-                            <h5><?php echo $note ?></h5>
-                            
-                        </div>
+                                    <div class="box-body">
+                                        <h4><?php echo $company; ?></h4>
+                                        <h5><?php echo $note ?></h5>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <!-- Product -->
                     <div class="box box-info">
@@ -156,8 +166,8 @@ $_SESSION['SESS_FORM'] = 'index';
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Service</label>
-                                            <select class="form-control select2 " id="name"
-                                                name="product_id" style="width: 100%;" autofocus>
+                                            <select class="form-control select2 " id="name" name="product_id"
+                                                style="width: 100%;" autofocus>
                                                 <?php 
                                         $result = select('products', '*');
                                         for ($i = 0; $row = $result->fetch(); $i++) {  
@@ -171,7 +181,7 @@ $_SESSION['SESS_FORM'] = 'index';
                                             </select>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label>Quantity</label>
@@ -183,7 +193,7 @@ $_SESSION['SESS_FORM'] = 'index';
                                         <div class="form-group">
                                             <label>Price</label>
                                             <input type="number" class="form-control" name="price" id="qty"
-                                                style="width: 100%;" >
+                                                style="width: 100%;">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -226,14 +236,16 @@ $_SESSION['SESS_FORM'] = 'index';
                                     <tr>
                                         <td><?php echo $row['id'] ?></td>
                                         <td>
-                                        <?php if(strlen($row['approvel_doc']) > 0){ ?>
-                                        <img src="app/save/uploads/product_img/<?php echo $row['approvel_doc']; ?>"
-                                        alt="Uploaded Photo" style="width: 100px; height: auto;">  
-                                        
-                                        <?php } ?> 
-                                        <a href="view_photo_job.php?id=<?php echo $row['id']; ?>"
-                                        style="margin-top: 10px;" target="_blank"><div class="badge  bg-blue">View</div></a>
-                                        
+                                            <?php if(strlen($row['approvel_doc']) > 0){ ?>
+                                            <img src="app/save/uploads/product_img/<?php echo $row['approvel_doc']; ?>"
+                                                alt="Uploaded Photo" style="width: 100px; height: auto;">
+
+                                            <?php } ?>
+                                            <a href="view_photo_job.php?id=<?php echo $row['id']; ?>"
+                                                style="margin-top: 10px;" target="_blank">
+                                                <div class="badge  bg-blue">View</div>
+                                            </a>
+
                                         </td>
 
                                         <td><?php echo $row['name'] ?></td>
@@ -242,20 +254,39 @@ $_SESSION['SESS_FORM'] = 'index';
                                         <td><?php echo $row['qty']  ?></td>
                                         <td><?php echo $row['amount'] ?></td>
                                         <td><?php echo $row['status'] ?></td>
-                                        <td><?php if($row['status_id']==0){?> 
-                                            <button class="btn btn-sm btn-red" onclick="confirmDelete_product(<?php echo $row['id']  ?>)"><i class="fa fa-trash"></i></button>
+                                        <td><?php if($row['status_id']==0){?>
+                                            <button class="btn btn-sm bg-gray"
+                                                onclick="confirmDelete_product(<?php echo $row['id']  ?>)"><i
+                                                    class="fa fa-trash text-red"></i></button>
                                             <?php } ?>
                                         </td>
-                                        
+
                                     </tr>
                                     <?php } ?>
                                 </tbody>
                             </table>
-                            <a class="pull-right" href="save/genarate_quotation.php?id=<?php echo base64_decode($_GET['id']); ?>">
-                                            <button class="btn" id="generate_invo">Generate
-                                                Quotation</button> </a>
+
+                            <?php $qt=select_item('sales','transaction_id'," comment = 'no' AND type='Quotation' AND job_no='$id'");
+                            if($qt > 0){ ?>
+                            <div class="col-md-6">
+                                <div class="alert alert-warning alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                    <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+                                    What is the consumer's decision about this Quotation ? <br>
+
+                                    <button onclick="quotation(2);" class="btn bg-red">Rejected</button>
+                                    <button onclick="quotation(1);" class="btn bg-green">Accept</button>
+
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <a class="pull-right"
+                                href="save/genarate_quotation.php?id=<?php echo base64_decode($_GET['id']); ?>">
+                                <button class="btn" id="generate_invo">Generate
+                                    Quotation</button> </a>
                         </div>
-                        
+
                     </div>
 
                     <!-- Team -->
@@ -265,66 +296,66 @@ $_SESSION['SESS_FORM'] = 'index';
                         </div>
 
                         <div class="box-body <?php if ($action >= 2) {} else { echo 'd-none'; } ?>">
-                            
 
-                        
-                                       <div class="col-md-6">
-                                       <small>Select a few stations that provide the service from the selector below
-                                            and press the save button</small>
-                                    
-                                    <form action="save/job/job_team.php" method="post">
-                                        <div class="input-group input-group-sm">
-                                            <select class="form-control select2" name="location_id[]"
-                                                multiple="multiple" data-placeholder="Select Location"
-                                                style="width: 100%;" autocomplete="off" required>
-                                                <?php $set_cat=1;
+
+
+                            <div class="col-md-6">
+                                <small>Select a few stations that provide the service from the selector below
+                                    and press the save button</small>
+
+                                <form action="save/job/job_team.php" method="post">
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control select2" name="location_id[]" multiple="multiple"
+                                            data-placeholder="Select Location" style="width: 100%;" autocomplete="off"
+                                            required>
+                                            <?php $set_cat=1;
                                                 $result=select('employee'); 
                                                 for ($i = 0; $row = $result->fetch(); $i++) { $set_cat=0; ?>
-                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['username'] ?>
-                                                </option>
-                                                <?php } ?>  
-                                                   
-                                            </select>
-                                            <span class="input-group-btn">
-                                                <button type="submit" id="u2"
-                                                    class="btn btn-info btn-flat">Save</button>
-                                            </span>
-                                            <input  type="hidden" name="company_id" value="<?php echo $company_id; ?>" >
-                                            <input type="hidden" name="job_id" value="<?php echo $id ?>">
-                                        </div>
-                                    </form>
-                                        
-                                       </div>
+                                            <option value="<?php echo $row['id'] ?>"><?php echo $row['username'] ?>
+                                            </option>
+                                            <?php } ?>
 
-                                        <div class="box-body">
-                                        <div class="row">
-                                <?php $result=select('job_location','*','job_id='.$id); for ($i = 0; $row = $result->fetch(); $i++) { ?>
-                                <div class="col-md-3">
-                                    <div class="box box-primary collapsed-box box-solid">
-                                        <div class="box-header with-border" style="border-radius: 5px;">
-                                            <h3 class="box-title"><?php echo $row['name'] ?></h3>
-                                            <div class="box-tools pull-right">
-                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
+                                        </select>
+                                        <span class="input-group-btn">
+                                            <button type="submit" id="u2" class="btn btn-info btn-flat">Save</button>
+                                        </span>
+                                        <input type="hidden" name="company_id" value="<?php echo $company_id; ?>">
+                                        <input type="hidden" name="job_id" value="<?php echo $id ?>">
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <div class="box-body">
+                                <div class="row">
+                                    <?php $result=select('job_location','*','job_id='.$id); for ($i = 0; $row = $result->fetch(); $i++) { ?>
+                                    <div class="col-md-3">
+                                        <div class="box box-primary collapsed-box box-solid">
+                                            <div class="box-header with-border" style="border-radius: 5px;">
+                                                <h3 class="box-title"><?php echo $row['name'] ?></h3>
+                                                <div class="box-tools pull-right">
+                                                    <button type="button" class="btn btn-box-tool"
+                                                        data-widget="collapse">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="box-body">
+                                                <table id="example2" class="table table-bordered table-striped">
+                                                    <?php $loca_id=$row['location_id']; $result1=select('contact','*','location_id='.$loca_id); for ($i = 0; $row1 = $result1->fetch(); $i++) { ?>
+                                                    <tr width="100%">
+                                                        <td><?php echo $row1['name'].' - '.$row1['position'] ?></td>
+                                                        <td><?php echo $row1['phone_no'] ?></td>
+                                                    </tr>
+                                                    <?php } ?>
+                                                </table>
                                             </div>
                                         </div>
-                                        <div class="box-body">
-                                            <table id="example2" class="table table-bordered table-striped">
-                                                <?php $loca_id=$row['location_id']; $result1=select('contact','*','location_id='.$loca_id); for ($i = 0; $row1 = $result1->fetch(); $i++) { ?>
-                                                <tr width="100%">
-                                                    <td><?php echo $row1['name'].' - '.$row1['position'] ?></td>
-                                                    <td><?php echo $row1['phone_no'] ?></td>
-                                                </tr>
-                                                <?php } ?>
-                                            </table>
-                                        </div>
                                     </div>
+                                    <?php } ?>
                                 </div>
-                                <?php } ?>
                             </div>
-                                        </div>
-                            
+
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -357,92 +388,92 @@ $_SESSION['SESS_FORM'] = 'index';
                         </div>
 
                         <div class="box-body <?php if ($action >= 4) {} else { echo 'd-none'; } ?>">
-                            
 
-                        <form action="save/job/job_fix_save.php?id=<?php echo $id ?>" method="post">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label>Used Materials</label>
-                                                        <select class="form-control select2 " id="mat_id" name="mat_id"
-                                                            onchange="pro_select()" style="width: 100%;" tabindex="1"
-                                                            autofocus required>
-                                                            <?php 
+
+                            <form action="save/job/job_fix_save.php?id=<?php echo $id ?>" method="post">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Used Materials</label>
+                                            <select class="form-control select2 " id="mat_id" name="mat_id"
+                                                onchange="pro_select()" style="width: 100%;" tabindex="1" autofocus
+                                                required>
+                                                <?php 
                                                                         $result = select('materials', '*');
                                                                         while ($row = $result->fetch()) { 
                                                                             $mat_id = $row['id']; 
                                                                     ?>
-                                                            <option value="<?php echo $row['id']; ?>">
-                                                                <?php echo $row['name']; ?>
-                                                            </option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                <option value="<?php echo $row['id']; ?>">
+                                                    <?php echo $row['name']; ?>
+                                                </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                                <label>Unit</label>
-                                                            <select class="form-control select2" name="unit" id="unit"
-                                                                style="width: 100%;" tabindex="1" autofocus>
-                                                                <option value="0">Default</option>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Unit</label>
+                                            <select class="form-control select2" name="unit" id="unit"
+                                                style="width: 100%;" tabindex="1" autofocus>
+                                                <option value="0">Default</option>
 
-                                                                <!-- Options will be populated dynamically by JavaScript -->
-                                                            </select>
-                                                    </div>
-                                                </div>
+                                                <!-- Options will be populated dynamically by JavaScript -->
+                                            </select>
+                                        </div>
+                                    </div>
 
 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label>Quantity</label>
-                                                        <input type="number" class="form-control" name="qty" id="qty"
-                                                            step="0.001" min="0" style="width: 100%;" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <input type="hidden" value="1" name="id2">
-                                                        <input type="submit" style="margin-top: 23px; width: 100%;"
-                                                            id="u3" value="Save" class="btn btn-info btn-sm">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Quantity</label>
+                                            <input type="number" class="form-control" name="qty" id="qty" step="0.001"
+                                                min="0" style="width: 100%;" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input type="hidden" value="1" name="id2">
+                                            <input type="submit" style="margin-top: 23px; width: 100%;" id="u3"
+                                                value="Save" class="btn btn-info btn-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
 
-                                        <div class="box-body">
-                                            <table id="example2" class="table table-bordered table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Unit</th>
-                                                        <th>Type</th>
-                                                        <th>QTY</th>
-                                                        <th>@</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
+                            <div class="box-body">
+                                <table id="example2" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Unit</th>
+                                            <th>Type</th>
+                                            <th>QTY</th>
+                                            <th>@</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
                                                          // Fetch fix materials data from the database
                                                           $result = select('fix_materials', '*', 'sales_list_id=' . $id);
                                                            while ($row = $result->fetch()) { ?>
-                                                    <tr>
-                                                        <td><?php echo $row['id']; ?></td>
-                                                        <td><?php echo $row['mat_name']; ?></td>
-                                                        <td><?php echo $row['unit']; ?></td>
-                                                        <td><?php echo $row['type']; ?></td>
-                                                        <td><?php echo $row['qty']; ?></td>
-                                                        <td> <a class="btn btn-sm btn-danger"
-                                                                onclick="confirmDelete2(<?php echo $row['id']; ?>)"><i
-                                                                    class="fa fa-trash"></i></a></td>
+                                        <tr>
+                                            <td><?php echo $row['id']; ?></td>
+                                            <td><?php echo $row['mat_name']; ?></td>
+                                            <td><?php echo $row['unit']; ?></td>
+                                            <td><?php echo $row['type']; ?></td>
+                                            <td><?php echo $row['qty']; ?></td>
+                                            <td> <a class="btn btn-sm btn-danger"
+                                                    onclick="confirmDelete2(<?php echo $row['id']; ?>)"><i
+                                                        class="fa fa-trash"></i></a></td>
 
-                                                    </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                            
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -469,7 +500,7 @@ $_SESSION['SESS_FORM'] = 'index';
                         </div>
                     </div>
 
-                     <!-- Pricing -->
+                    <!-- Pricing -->
                     <div class="box box-info">
                         <div class="box-header">
                             <h3>Price <small>Generate</small></h3>
@@ -504,12 +535,13 @@ $_SESSION['SESS_FORM'] = 'index';
                                                     <?php echo $row['name'].' ['.$row['about'].'] '; ?>
                                                 </option>
                                                 <?php } ?>
-                                            <?php 
+                                                <?php 
                                             $result=select('products','*',"type='direct_selling'");
                                             while ($row = $result->fetch()) { 
                                             ?>
-                                            <option pro_type="direct" value="<?php echo $row['id']  ?>"><?php echo $row['product_name'];  ?></option>
-                                            <?php } ?>
+                                                <option pro_type="direct" value="<?php echo $row['id']  ?>">
+                                                    <?php echo $row['product_name'];  ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -517,16 +549,14 @@ $_SESSION['SESS_FORM'] = 'index';
                                     <div class="col-md-2" id="qty_input" style=" display: none;">
                                         <div class="form-group">
                                             <label>QTY</label>
-                                            <input type="text" class="form-control"  name="qty"
-                                                value="1">
+                                            <input type="text" class="form-control" name="qty" value="1">
                                         </div>
                                     </div>
 
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label>Price</label>
-                                            <input type="text" class="form-control" id="price" name="price"
-                                                value="0">
+                                            <input type="text" class="form-control" id="price" name="price" value="0">
                                         </div>
                                     </div>
 
@@ -539,66 +569,66 @@ $_SESSION['SESS_FORM'] = 'index';
                                     <input type="hidden" value="<?php echo $id; ?>" name="job_no">
                                     <input type="hidden" value="indirect" name="type" id="pricing_type">
                                 </div>
-                                </form>
+                            </form>
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <table id="example2" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Location</th>
-                                                    <th>Name</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="example2" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Location</th>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
                             $totalAmount = 0;
                             $result = select('sales_list', '*', 'job_no = ' . $id . ' AND amount > 0');
                             while ($row = $result->fetch()) { 
                                 $totalAmount += $row['amount']; // Sum the amounts
                             ?>
-                                                <tr>
-                                                    <td><?php echo $row['location']; ?></td>
+                                            <tr>
+                                                <td><?php echo $row['location']; ?></td>
 
 
 
 
-                                                    <td>
-                                                        <div
-                                                            style="display: flex; align-items: center; justify-content: space-between;">
-                                                            <span><?php echo $row['name']; ?></span>
+                                                <td>
+                                                    <div
+                                                        style="display: flex; align-items: center; justify-content: space-between;">
+                                                        <span><?php echo $row['name']; ?></span>
 
-                                                            <div align="center">
-                                                                <?php if (!empty($row['about'])): ?>
-                                                                <div class="badge bg-green">
-                                                                    <?php echo $row['about']; ?>
-                                                                </div>
-                                                                <br>
-                                                                <?php endif; ?>
+                                                        <div align="center">
+                                                            <?php if (!empty($row['about'])): ?>
+                                                            <div class="badge bg-green">
+                                                                <?php echo $row['about']; ?>
                                                             </div>
+                                                            <br>
+                                                            <?php endif; ?>
                                                         </div>
-                                                    </td>
+                                                    </div>
+                                                </td>
 
 
 
-                                                    <td><?php echo $row['qty']; ?></td>
-                                                    <td><?php echo $row['amount']; ?></td>
-                                                </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Total Amount</th>
-                                                    <th colspan="2"></th>
-                                                    <th><?php echo $totalAmount; ?></th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
+                                                <td><?php echo $row['qty']; ?></td>
+                                                <td><?php echo $row['amount']; ?></td>
+                                            </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Total Amount</th>
+                                                <th colspan="2"></th>
+                                                <th><?php echo $totalAmount; ?></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
-                            
+                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -619,21 +649,30 @@ $_SESSION['SESS_FORM'] = 'index';
 
                     // Check if the pay_type is 'credit'
                     if ($type === 'credit') { ?>
-                   <div class="btn-group">
-                  <button type="button" onclick="location.href = 'save/print.php?id=<?php echo base64_decode($_GET['id']); ?>' " class="btn btn-default btn-flat" style="border-radius: 10px 0px 0px 10px">Print</button>
-                  <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown" style="border-radius: 0px 10px 10px 0px">
-                    <span class="caret"></span>
-                    <span class="sr-only">Format</span>
-                  </button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="save/print.php?id=<?php echo base64_decode($_GET['id']); ?>&type=location">Location</a></li>
-                    <li><a href="save/print.php?id=<?php echo base64_decode($_GET['id']); ?>">Product</a></li>
-                  </ul>
-                </div>
-                
-               
+                                        <div class="btn-group">
+                                            <button type="button"
+                                                onclick="location.href = 'save/print.php?id=<?php echo base64_decode($_GET['id']); ?>' "
+                                                class="btn btn-default btn-flat"
+                                                style="border-radius: 10px 0px 0px 10px">Print</button>
+                                            <button type="button" class="btn btn-default btn-flat dropdown-toggle"
+                                                data-toggle="dropdown" style="border-radius: 0px 10px 10px 0px">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Format</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a
+                                                        href="save/print.php?id=<?php echo base64_decode($_GET['id']); ?>&type=location">Location</a>
+                                                </li>
+                                                <li><a
+                                                        href="save/print.php?id=<?php echo base64_decode($_GET['id']); ?>">Product</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+
                                         <?php } else { ?>
-                                        <a href="save/genarate_invoice.php?id=<?php echo base64_decode($_GET['id']); ?>">
+                                        <a
+                                            href="save/genarate_invoice.php?id=<?php echo base64_decode($_GET['id']); ?>">
                                             <button class="btn btn-sm btn-info" id="generate_invo">Generate
                                                 Invoice</button>
                                         </a>
@@ -644,7 +683,7 @@ $_SESSION['SESS_FORM'] = 'index';
                         </div>
                     </div>
 
-                     <!-- Payment -->
+                    <!-- Payment -->
                     <div class="box box-info">
                         <div class="box-header">
                             <h3>Payment <small>section</small></h3>
@@ -782,7 +821,7 @@ $_SESSION['SESS_FORM'] = 'index';
                             </form>
                         </div>
                     </div>
-                    
+
 
 
         </section>
@@ -861,26 +900,26 @@ $_SESSION['SESS_FORM'] = 'index';
     });
 
     function pro_select() {
-    // Get the selected product ID from the #mat_id dropdown
-    let productId = $('#mat_id').val();
+        // Get the selected product ID from the #mat_id dropdown
+        let productId = $('#mat_id').val();
 
-    // New AJAX call to fetch units for selected product
-    $.ajax({
-        type: "GET",
-        url: "get_units.php",
-        data: {
-            mat_id: productId
-        },
-        success: function(response) {
-            // Populate the Unit selector with the received options
-            $("#unit").empty();
-            $("#unit").append(response);
-        },
-        error: function() {
-            alert("Error fetching unit data");
-        }
-    });
-}
+        // New AJAX call to fetch units for selected product
+        $.ajax({
+            type: "GET",
+            url: "get_units.php",
+            data: {
+                mat_id: productId
+            },
+            success: function(response) {
+                // Populate the Unit selector with the received options
+                $("#unit").empty();
+                $("#unit").append(response);
+            },
+            error: function() {
+                alert("Error fetching unit data");
+            }
+        });
+    }
 
 
     function confirmDelete2(id) {
@@ -893,7 +932,22 @@ $_SESSION['SESS_FORM'] = 'index';
     function confirmDelete_product(id) {
         if (confirm('Are you sure you want to delete this item?')) {
             // Redirect to a PHP page that handles the deletion
-            window.location.href = 'save/job/product_dll.php?id=' + id+'&job_no=<?php echo $id; ?>';
+            window.location.href = 'save/job/product_dll.php?id=' + id + '&job_no=<?php echo $id; ?>';
+        }
+    }
+
+    function quotation(data) {
+        if (data == 1) {
+            if (confirm('Did the customer agree with this price?')) {
+                // Redirect to a PHP page that handles the deletion
+                window.location.href = 'save/job/quotation_app.php?id=<?php echo $id; ?>&app=1';
+            }
+        }
+        if (data == 2) {
+            if (confirm('Did the customer disagree with this price?')) {
+                // Redirect to a PHP page that handles the deletion
+                window.location.href = 'save/job/quotation_app.php?id=<?php echo $id; ?>&app=2';
+            }
         }
     }
     </script>
@@ -902,16 +956,15 @@ $_SESSION['SESS_FORM'] = 'index';
 
 
     <script type="text/javascript">
+    window.addEventListener("scroll", () => {
+        const scrollPosition = window.scrollY;
+        const element1 = document.getElementById("element1");
 
-window.addEventListener("scroll", () => {
-    const scrollPosition = window.scrollY;
-    const element1 = document.getElementById("element1");
+        // Hold Box 1 to scroll at a slower rate to give a 'held' effect
+        element1.style.transform = `translateY(${scrollPosition * 0.85}px)`;
 
-    // Hold Box 1 to scroll at a slower rate to give a 'held' effect
-    element1.style.transform = `translateY(${scrollPosition * 0.85}px)`;
 
-    
-});
+    });
 
 
     $(function() {
@@ -928,21 +981,21 @@ window.addEventListener("scroll", () => {
     });
     </script>
     <script>
-function price_type(){
-    var select = document.getElementById('price_item');
-    var selectedOption = select.options[select.selectedIndex];
-    // Get the 'pro_type' attribute from the selected option
-    var item = selectedOption.getAttribute('pro_type');
-    
-    if(item=='direct'){
-        document.getElementById('qty_input').style.display = 'block';
-        document.getElementById('pricing_type').value = 'direct';
-    }else{
-        document.getElementById('qty_input').style.display = 'none';
-        document.getElementById('pricing_type').value = 'indirect';
-    }
+    function price_type() {
+        var select = document.getElementById('price_item');
+        var selectedOption = select.options[select.selectedIndex];
+        // Get the 'pro_type' attribute from the selected option
+        var item = selectedOption.getAttribute('pro_type');
 
-}
+        if (item == 'direct') {
+            document.getElementById('qty_input').style.display = 'block';
+            document.getElementById('pricing_type').value = 'direct';
+        } else {
+            document.getElementById('qty_input').style.display = 'none';
+            document.getElementById('pricing_type').value = 'indirect';
+        }
+
+    }
 
 
     function select_pay() {

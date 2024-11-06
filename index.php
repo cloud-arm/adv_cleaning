@@ -438,7 +438,7 @@ $user_level = $_SESSION['USER_LEWAL'];
                                 <div class="form-group">
                                     <input type="hidden" name="cus_id" value="0" id="cus_id">
 
-                                    <input type="submit"  style="margin-top: 23px; width: 100%;" id="u1" value="Save"
+                                    <input type="submit"  onclick="click_close('add')"  style="margin-top: 23px; width: 100%;" id="u1" value="Save"
                                         class="btn btn-info btn-sm pull-right">
                                 </div>
                             </div>

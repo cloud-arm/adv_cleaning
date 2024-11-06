@@ -276,8 +276,8 @@ $_SESSION['SESS_BACK']='job_view';
                                     <h4><i class="icon fa fa-warning"></i> Alert!</h4>
                                     What is the consumer's decision about this Quotation ? <br>
 
-                                    <button onclick="quotation(2);" class="btn bg-red">Rejected</button>
-                                    <button onclick="quotation(1);" class="btn bg-green">Accept</button>
+                                    <button onclick="quotation(2);this.disabled = true;" class="btn bg-red">Rejected</button>
+                                    <button onclick="quotation(1);this.disabled = true;" class="btn bg-green">Accept</button>
 
                                 </div>
                             </div>
@@ -304,9 +304,9 @@ $_SESSION['SESS_BACK']='job_view';
                                         </div>
                             <?php }else{ 
                              ?>
-                            <a class="pull-right"
+                            <a class="pull-right" 
                                 href="save/genarate_quotation.php?id=<?php echo base64_decode($_GET['id']); ?>">
-                                <button class="btn" id="generate_invo">Generate
+                                <button class="btn"  onclick="this.disabled = true;" id="generate_invo">Generate
                                     Quotation</button> </a> <?php } ?>
                         </div>
 

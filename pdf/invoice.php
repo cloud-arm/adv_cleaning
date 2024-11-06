@@ -39,6 +39,16 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     }
 
     $tot_row = '
+                <tr>
+                    <td align="center"><img src="icon/r.png" width="40" alt=""></td>
+                    <td style="font-size:18px" colspan="3" align="right"><h3>Total:</h3></td>
+                    <td style="font-size:18px" align="right"><h3>Rs.' . number_format($total, 2) . '</h3></td>
+                </tr>
+                <tr>
+                    <td align="center">CLOUD ARM</td>
+                    <td style="font-size:18px" colspan="3" align="right"><h3></h3></td>
+                    <td style="font-size:18px" align="right"><h3></h3></td>
+                </tr>
                 ';
 
 
@@ -63,7 +73,6 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $output = '
 <html>
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <style>
 body {
 font-family: Poppins;
@@ -133,7 +142,7 @@ $contact = '0779252594';
 
     $text = 'Dear [Customers Name],Thank you for choosing Advanced Cleaning Services! Please find your quote attached. We look forward to your feedback and are excited to provide you with our top-quality service.Best regards,The Advanced Cleaning Services Team';
     $url = get_pdf($output, 'invoice', 'bin/');
-    $url = 'pdf/' . $url;
+    $url = 'https://adcleaning.colorbiz.org/main/pages/forms/pdf/' . $url;
     echo "URL is".$url;
     whatsApp($contact, $text,$url);
     

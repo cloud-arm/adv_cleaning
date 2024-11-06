@@ -2,6 +2,7 @@
 session_start();
 include("../connect.php");
 include("../config.php");
+include("pdf.php");
 date_default_timezone_set("Asia/Colombo");
 
 $date = date("Y-m-d");
@@ -138,14 +139,15 @@ font-family: Poppins;
 
 echo $output; 
 
+
 $contact = '94779252594';
-if (!empty($contact)) {
+
     $text = 'Dear [Customers Name],Thank you for choosing Advanced Cleaning Services! Please find your quote attached. We look forward to your feedback and are excited to provide you with our top-quality service.Best regards,The Advanced Cleaning Services Team';
     $url = get_pdf($output, 'invoice', 'bin/');
     $url = 'pdf/' . $url;
     echo "URL is".$url;
     whatsApp($contact, $text, $url);
-}
+
 $return = $_SESSION['SESS_BACK'];
 
 

@@ -87,7 +87,7 @@ font-family: Poppins;
             <table  cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr>
                     <td valign="top" width="60%">
-                        <img src="../icon/Logo-Laugfs-Gas.png" alt="Logo" style="max-width:150px;"><br>
+                        <img src="../img/logo/logo.jpg" alt="Logo" style="max-width:150px;"><br>
                          <b style="font-family: Poppins; font-size:17px">' . $info_name . '</b><br>
                          <b style="font-family: Poppins; font-size:15px">' . $info_add . '</b><br>
                          <b style="font-family: Poppins; font-size:15px">' . $info_con . '</b><br>
@@ -143,10 +143,11 @@ if (!empty($contact)) {
     $text = 'Dear [Customers Name],Thank you for choosing Advanced Cleaning Services! Please find your quote attached. We look forward to your feedback and are excited to provide you with our top-quality service.Best regards,The Advanced Cleaning Services Team';
     $url = get_pdf($output, 'invoice', 'bin/');
     $url = 'pdf/' . $url;
+    echo "URL is".$url;
     whatsApp($contact, $text, $url);
 }
 $return = $_SESSION['SESS_BACK'];
 
-echo $url;
+
 
 //header("location: ../$return");

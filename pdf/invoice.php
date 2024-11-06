@@ -6,11 +6,12 @@ date_default_timezone_set("Asia/Colombo");
 
 $date = date("Y-m-d");
 $time = date("H.i");
+$path="../";
 
+$job_id=$_GET['id'];
+$action=$_GET['type'];
 
-$result = $db->prepare("SELECT * FROM info ");
-$result->bindParam(':userid', $date);
-$result->execute();
+$result = query("SELECT * FROM info ",$path);
 for ($i = 0; $row = $result->fetch(); $i++) {
     $info_name = $row['name'];
     $info_add = $row['address'];
@@ -18,45 +19,23 @@ for ($i = 0; $row = $result->fetch(); $i++) {
     $info_con = $row['phone_no'];
 }
 
-if (isset($_GET['invo'])) {
-
-    $invo = base64_decode($_GET['invo']);
-    $sql = "SELECT * FROM sales WHERE invoice_number='$invo'  ";
-} else if (isset($_GET['id'])) {
-
-    $id = base64_decode($_GET['id']);
-    $sql = "SELECT * FROM sales WHERE transaction_id='$id'  ";
+$result = $db->prepare("SELECT * FROM sales WHERE   job_no='$job_id'");
+$result->bindParam(':userid', $date);
+$result->execute();
+for ($i = 0; $row = $result->fetch(); $i++) {
+	$cus_name = $row['customer_name'];
+    $cus_id=$row['customer_id'];
+    $address=$row['address'];
+    $invo=$row['invoice_number'];
+    $total=$row['amount'];
 }
 
-$result1 = $db->prepare($sql);
-$result1->bindParam(':userid', $date);
-$result1->execute();
-for ($i = 0; $row1 = $result1->fetch(); $i++) {
 
-    $vat_action = 0;
-    $result = $db->prepare('SELECT * FROM customer WHERE  customer_id=:id ');
-    $result->bindParam(':id', $row1['customer_id']);
-    $result->execute();
-    for ($i = 0; $row = $result->fetch(); $i++) {
-        $name = $row['customer_name'];
-        $vat_no = $row['vat_no'];
-        $address = $row['address'];
-        $contact = $row['whatsapp'];
-    }
-    if (strlen($vat_no) > 0) {
-        $vat_action = 1;
-    }
+    if ($action == 1) {
 
-    $total = $row1["amount"];
-
-    if ($vat_action == 1) {
-
-        $in_type = "TAX INVOICE";
-
-        $total = ($total / 118) * 100;
-        $vat = ($total / 118) * 18;
-    } else {
         $in_type = "INVOICE";
+    } else {
+        $in_type = "QUESTION";
     }
 
     $tot_row = '
@@ -72,35 +51,14 @@ for ($i = 0; $row1 = $result1->fetch(); $i++) {
                 </tr>
                 ';
 
-    if ($vat_action == 1) {
-        $tot_row = '
-                <tr>
-                    <td align="center"><img src="icon/r.png" width="40" alt=""></td>
-                    <td style="font-size:18px" colspan="3" align="right"><h3>Total:</h3></td>
-                    <td style="font-size:18px" align="right"><h3>Rs.' . number_format($total, 2) . '</h3></td>
-                </tr>
-                <tr>
-                    <td align="center">CLOUD ARM</td>
-                    <td style="font-size:18px" colspan="3" align="right"><h3>VAT:</h3></td>
-                    <td style="font-size:18px" align="right"><h3>Rs.' . number_format($vat, 2) . '</h3></td>
-                </tr>
-                ';
-    }
-
 
     $sales_list = "";
-    $result = $db->prepare("SELECT * FROM sales_list WHERE  invoice_no=:id ");
-    $result->bindParam(":id", $row1['invoice_number']);
-    $result->execute();
+    $result = select("sales_list","*","job_no='$job_id' ");
+    
     for ($i = 0; $row = $result->fetch(); $i++) {
 
         $price = $row['price'] - ($row['dic'] / $row['qty']);
         $amount = $price * $row['qty'];
-
-        if ($vat_action == 1) {
-            $price = ($price / 118) * 100;
-            $amount = ($amount / 118) * 100;
-        }
 
         $sales_list .= '
                  <tr>
@@ -133,7 +91,6 @@ font-family: Poppins;
                          <b style="font-family: Poppins; font-size:17px">' . $info_name . '</b><br>
                          <b style="font-family: Poppins; font-size:15px">' . $info_add . '</b><br>
                          <b style="font-family: Poppins; font-size:15px">' . $info_con . '</b><br>
-     					 <b style="font-size:15px">VAT No: </b> ' . $info_vat . '<br><br><br>
                     </td>
                     <td align="right" valign="top" width="40%">
                         <b style="font-family:Poppins; font-size:30px">' . $in_type . '</b><br><br>
@@ -178,7 +135,7 @@ font-family: Poppins;
 </body>
 </html>
 ';
-}
+
 
 $contact = '94779252594';
 if (!empty($contact)) {

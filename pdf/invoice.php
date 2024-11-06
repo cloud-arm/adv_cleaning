@@ -2,7 +2,6 @@
 session_start();
 include("../connect.php");
 include("../config.php");
-include("pdf.php");
 date_default_timezone_set("Asia/Colombo");
 
 $date = date("Y-m-d");

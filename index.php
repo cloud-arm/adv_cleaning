@@ -198,7 +198,7 @@ $user_level = $_SESSION['USER_LEWAL'];
                     <td><?php echo $row['name']; ?></td>
                     <td>
                         <?php
-                        $r = select('job_location', '*', 'job_id=' . $id);
+                        $r = select('job_team', '*', 'job_id=' . $id);
 
                         while ($locationRow = $r->fetch()) {
                         ?>

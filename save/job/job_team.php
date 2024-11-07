@@ -8,7 +8,7 @@ $com_id=$_POST['company_id'];
 $insertData = array(
     "data" => array(
         "name" => select_item('employee','username','id='.$id,'../../'),
-        "location_id" => $id,
+        "emp_id" => $id,
         "company_id" => $_POST['company_id'],
         "company_name" => select_item('customer','name','id='.$com_id,'../../'),
         "job_id" => $_POST['job_id'],
@@ -19,7 +19,7 @@ $insertData = array(
     "other" => array( 
     ),
 );
-$result=insert("job_location", $insertData,'../../');
+$result=insert("job_team", $insertData,'../../');
 }
 
 $updateData = ["action" => 3];

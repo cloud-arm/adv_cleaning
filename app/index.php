@@ -169,11 +169,10 @@
    
 
 
-
     <div class="container room-container">
         <div class="row">
             <?php 
-            $result = $db->prepare("SELECT * FROM job_location JOIN job ON job.id=job_location.job_id WHERE  job_location.emp_id='$user' AND job.status !='finish' ");
+            $result = $db->prepare("SELECT * FROM job_team JOIN job ON job.id=job_team.job_id WHERE  job_team.emp_id='$user' AND job.status !='finish' ");
             $result->bindParam(':userid', $date);
             $result->execute();
             for ($i = 0; $row = $result->fetch(); $i++) { $con=$row['status'] ?>

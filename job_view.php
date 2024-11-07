@@ -14,7 +14,7 @@ $_SESSION['SESS_BACK']='job_view';
 }
 </style>
 
-<body class="hold-transition skin-blue skin-orange sidebar-mini">
+<body class="hold-transition skin-blue  sidebar-mini">
 
     <?php include_once("start_body.php"); ?>
 

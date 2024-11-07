@@ -4,7 +4,7 @@
 include("head.php");
 ?>
 
-<body class="hold-transition skin-yellow sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper" style="overflow-y: hidden;">
         <?php
         include_once("auth.php");

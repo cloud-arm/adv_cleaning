@@ -349,10 +349,10 @@ $_SESSION['SESS_BACK']='job_view';
 
                             </div>
 
-                            <div class="box-body">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <?php $result=select('job_location','*','job_id='.$id); for ($i = 0; $row = $result->fetch(); $i++) { ?>
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <div class="box box-primary collapsed-box box-solid">
                                             <div class="box-header with-border" style="border-radius: 5px;">
                                                 <h3 class="box-title"><?php echo $row['name'] ?></h3>
@@ -365,9 +365,9 @@ $_SESSION['SESS_BACK']='job_view';
                                             </div>
                                             <div class="box-body">
                                                 <table id="example2" class="table table-bordered table-striped">
-                                                    <?php $loca_id=$row['location_id']; $result1=select('contact','*','location_id='.$loca_id); for ($i = 0; $row1 = $result1->fetch(); $i++) { ?>
+                                                    <?php $loca_id=$row['location_id']; $result1=select('employee','*','id='.$loca_id); for ($i = 0; $row1 = $result1->fetch(); $i++) { ?>
                                                     <tr width="100%">
-                                                        <td><?php echo $row1['name'].' - '.$row1['position'] ?></td>
+                                                        <td><?php echo $row1['des'] ?></td>
                                                         <td><?php echo $row1['phone_no'] ?></td>
                                                     </tr>
                                                     <?php } ?>

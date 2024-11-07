@@ -40,7 +40,7 @@ $contact=select_item('customer','contact','id='.$cus_id,$path);
 
         $in_type = "INVOICE";
     } else {
-        $in_type = "QUESTION";
+        $in_type = "QUOTATION";
     }
 
     $tot_row = '

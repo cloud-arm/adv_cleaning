@@ -37,7 +37,7 @@
     
 
     
-        $collection = 0;
+        $collection = $user;
     
     ?>
 </head>
@@ -164,55 +164,48 @@
         </div>
     <?php } ?>
 
-    <div class="float-btn">
-        <span class="room-info active" id="float_btn">
-            <div class="room-box first">
-                <span><i class="fa-solid fa-rotate-right"></i></span>
-            </div>
-        </span>
-    </div>
 
-    <div class="container-fluid mb-3">
-        <div class="box">
-            <div class="box-header">
-                <h4 class="fs-4 m-0">Collection Rs.<?php echo number_format($collection, 2) ?></h4>
-                <a class="room-info active" href="appointment_customer_checking.php">
-                    <div class="room-box first">
-                        <span><i class="fa-solid fa-plus"></i></span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+
+   
 
 
 
     <div class="container room-container">
         <div class="row">
-            <?php $result = $db->prepare("SELECT * FROM job_location JOIN job ON job.id=job_location.job_id WHERE  job_location.location_id='$user' AND job.status !='finish' ");
-                                                    $result->bindParam(':userid', $date);
-                                                    $result->execute();
-                                                    for ($i = 0; $row = $result->fetch(); $i++) { $con=$row['status'] ?>
+            <?php 
+            $result = $db->prepare("SELECT * FROM job_location JOIN job ON job.id=job_location.job_id WHERE  job_location.emp_id='$user' AND job.status !='finish' ");
+            $result->bindParam(':userid', $date);
+            $result->execute();
+            for ($i = 0; $row = $result->fetch(); $i++) { $con=$row['status'] ?>
         <div class="col-12 col-sm-6 col-md-6 col-lg-4">
         <div class="ajk_ady ">
-            <div class="info-box" style="border: 2px solid rgb(var(--bg-theme));<?php if ($con == 'active') { ?> background: rgba(var(--bg-theme), 0.25);<?php } ?>">
+            <div class="info-box" style="border: 2px solid rgb(var(--bg-theme));<?php if ($con == 'Started') { ?> background: rgba(var(--bg-theme), 0.25);<?php } ?>">
                 <div class="row w-100">
-                    <div class="col-3 p-0">
+                    <div class="col-12 p-0">
                         <div class="inb_num">
-                            <span class="num" <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?>><?php // echo $num; ?></span>
+                            <span class="num" <?php if ($con == 'Started') { ?> style="color: rgb(var(--bg-black));" <?php } ?>><?php // echo $num; ?></span>
                             
                             <span class="head"><?php echo $row['name']; ?></span>
                         </div>
                     </div>
-                    <div class="col-9 as_jdk">
-                       
+                    
+                </div>
+                <div class="row w-100">
+                    <div class="col-12 p-0">
+                        <div class="inb_num">
+                            <span class="num" <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?>><?php // echo $num; ?></span>
+                            
+                            <span class="type"><?php echo  $row['note']; ?> </span>
+                        </div>
+                    </div>
+                    <div class="col-12 as_jdk">
                         <div class="info-foot">
                             <div class="qty-box">
                                 <span class="time"><?php // echo  $deff_time; ?> </span>
                             </div>
                             <div class="app">
-                                <span class="type"><?php echo  $row['note']; ?> </span>
-                                <a class="nav-link" style="align-self: end;"  href="appointment_action.php?id=<?php echo $row['id'] ?>">
+                                
+                                <a class="nav-link" style="align-self: end;"  href="job_view.php?id=<?php echo $row['id'] ?>">
                                     <span <?php if ($con == 'active') { ?> style="color: rgb(var(--bg-black));" <?php } ?> class="bin btn">View</span>
                                 </a>
                             </div>

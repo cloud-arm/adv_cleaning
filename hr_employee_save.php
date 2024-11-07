@@ -33,7 +33,7 @@ if ($nickname == '') {
     $user_name = $_POST['username'];
     $password = $_POST['password'];
 
-    $user_name = $nickname;
+   // $user_name = $nickname;
 
 
 $user_name = strtolower($user_name);

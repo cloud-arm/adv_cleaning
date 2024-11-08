@@ -52,11 +52,12 @@ $_SESSION['SESS_FORM'] = 'price_fm';
                                 <th>Product</th>
                                 <th>Slab</th>
                                 <th>Price</th>
+                                <th>#</th>
                             </tr>
 
                         </thead>
                         <tbody>
-                            <?php $result = select('price_fm','*');
+                            <?php $result = select('price_fm','*','action=0');
     for ($i = 0; $row = $result->fetch(); $i++) { ?>
                             <tr>
                                 <td><?php echo $row['id']  ?></td>
@@ -64,6 +65,10 @@ $_SESSION['SESS_FORM'] = 'price_fm';
                                 <td><?php echo $row['product']  ?></td>
                                 <td><?php echo number_format($row['slb_from']).'-'.number_format($row['slb_to'])   ?></td>
                                 <td><?php echo $row['price']  ?></td>
+                                <td><button class="btn btn-sm bg-gray"
+                                                onclick="confirmDelete(<?php echo $row['id']  ?>)"><i
+                                                    class="fa fa-trash text-red"></i></button>
+                                </td>
                                 
 
                             </tr>
@@ -187,6 +192,14 @@ $_SESSION['SESS_FORM'] = 'price_fm';
 
     <!-- page script -->
     <script>
+
+    function confirmDelete(id) {
+        if (confirm('Are you sure you want to delete this Price ?')) {
+            // Redirect to a PHP page that handles the deletion
+            window.location.href = 'save/job/price_fm_dll.php?id=' + id;
+        }
+    }
+
     function edit_note(i) {
         //  $(".popup").addClass("d-none");
         $("#edit_popup_" + i).removeClass("d-none");
@@ -238,12 +251,7 @@ $_SESSION['SESS_FORM'] = 'price_fm';
 
     });
 
-    function confirmDelete(id) {
-        if (confirm('Are you sure you want to delete this item?')) {
-            // Redirect to a PHP page that handles the deletion
-            window.location.href = 'product_dll.php?id=' + id;
-        }
-    }
+   
     </script>
 </body>
 

@@ -211,7 +211,7 @@ $user_level = $_SESSION['USER_LEWAL'];
                         </div>
                         <?php } ?>
                     </td>
-                    <td><?php echo $row['date']; ?></td>
+                    <td><?php echo $row['app_date']; ?></td>
  
 
                     <td>

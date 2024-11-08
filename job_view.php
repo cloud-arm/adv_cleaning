@@ -231,8 +231,8 @@ $_SESSION['SESS_BACK']='job_view';
                                 <tbody>
                                     <?php
                                      // Fetch channeling data from the database, sorted by the most recent entry first
+                                     $tot=0;
                                      $result = select('sales_list', '*', "job_no='$id' AND status!='delete'", '');
-
                                      for ($i = 0; $row = $result->fetch(); $i++) { ?>
                                     <tr>
                                         <td><?php echo $row['id'] ?></td>
@@ -252,8 +252,8 @@ $_SESSION['SESS_BACK']='job_view';
                                         <td><?php echo $row['name'] ?></td>
                                         <td><?php echo $row['about'] ?></td>
                                         <td><?php echo $row['price']  ?></td>
-                                        <td><?php echo $row['qty']  ?></td>
-                                        <td><?php echo $row['amount'] ?></td>
+                                        <td><div class="badge  bg-blue"><?php echo $row['unit']  ?></div><?php echo $row['qty']  ?></td>
+                                        <td>Rs.<?php echo $row['amount'] ?></td>
                                         <td><?php echo $row['status'] ?></td>
                                         <td><?php if($row['status_id']==0){?>
                                             <button class="btn btn-sm bg-gray"
@@ -263,8 +263,16 @@ $_SESSION['SESS_BACK']='job_view';
                                         </td>
 
                                     </tr>
-                                    <?php } ?>
+                                    <?php $tot+=$row['amount']; } ?>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="5"></th>
+                                        <th>Total</th>
+                                        <th>Rs.<?php echo $tot; ?></th>
+                                        <th colspan="2"></th>
+                                    </tr>
+                                </tfoot>
                             </table>
 
                             <?php $qt=select_item('sales','transaction_id'," comment = 'no' AND type='Quotation' AND job_no='$id'");
@@ -274,10 +282,18 @@ $_SESSION['SESS_BACK']='job_view';
                                     <button type="button" class="close" data-dismiss="alert"
                                         aria-hidden="true">&times;</button>
                                     <h4><i class="icon fa fa-warning"></i> Alert!</h4>
-                                    What is the consumer's decision about this Quotation ? <br>
+                                    What is the consumer's decision about this Quotation ? <br> <br>
 
+                                    
+                                    <div class="col-md-5">
+                                    <input class="form-control" type="text" placeholder="Job Date" id="datepicker">
+                                    </div>
+                                    <div class="col-md-7">
                                     <button onclick="quotation(2);this.disabled = true;" class="btn bg-red">Rejected</button>
                                     <button onclick="quotation(1);this.disabled = true;" class="btn bg-green">Accept</button>
+                                    </div>
+                                    
+                                    <br>
 
                                 </div>
                             </div>
@@ -329,7 +345,7 @@ $_SESSION['SESS_BACK']='job_view';
                                 <form action="save/job/job_team.php" method="post">
                                     <div class="input-group input-group-sm">
                                         <select class="form-control select2" name="location_id[]" multiple="multiple"
-                                            data-placeholder="Select Location" style="width: 100%;" autocomplete="off"
+                                            data-placeholder="Select Team" style="width: 100%;" autocomplete="off"
                                             required>
                                             <?php $set_cat=1;
                                                 $result=select('employee'); 
@@ -963,7 +979,8 @@ $_SESSION['SESS_BACK']='job_view';
         if (data == 1) {
             if (confirm('Did the customer agree with this price?')) {
                 // Redirect to a PHP page that handles the deletion
-                window.location.href = 'save/job/quotation_app.php?id=<?php echo $id; ?>&app=1';
+                date=document.getElementById('datepicker').value
+                window.location.href = 'save/job/quotation_app.php?id=<?php echo $id; ?>&app=1&date='+date;
             }
         }
         if (data == 2) {
@@ -1043,7 +1060,9 @@ $_SESSION['SESS_BACK']='job_view';
         format: 'yyyy-mm-dd '
     });
     $('#datepicker').datepicker({
-        autoclose: true
+        autoclose: true,
+        datepicker: true,
+        format: 'yyyy-mm-dd'
     });
 
 

@@ -16,6 +16,13 @@ $price_set=$_POST['price'];
 $product_name=select_item('products','product_name','id='.$product_id,'../../');
 $price=select_item('products','price','id='.$product_id,'../../');
 
+$result=select('products','*','id='.$product_id,'../../');
+while ($row = $result->fetch()) {
+    $pro_name=$row['product_name'];
+    $price=$row['price'];
+    $unit=$row['cat'];
+}
+
 $result=select('price_fm','*','product_id='.$product_id.' AND action=0','../../');
 while ($row = $result->fetch()) {
     if($quantity > $row['slb_from'] && $quantity < $row['slb_to']) {
@@ -42,6 +49,7 @@ $insertData = array(
         "date" => $date,
         "about" => $about,
         "status" =>'pending',
+        "unit"=>$unit,
     ),
     "other" => array(
     ),

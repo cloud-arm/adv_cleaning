@@ -16,7 +16,7 @@ $price_set=$_POST['price'];
 $product_name=select_item('products','product_name','id='.$product_id,'../../');
 $price=select_item('products','price','id='.$product_id,'../../');
 
-$result=select('price_fm','*','product_id='.$product_id,'../../');
+$result=select('price_fm','*','product_id='.$product_id.' AND action=0','../../');
 while ($row = $result->fetch()) {
     if($quantity > $row['slb_from'] && $quantity < $row['slb_to']) {
         $price=$row['price'];
